@@ -1,0 +1,17 @@
+{
+  "name": "task-api",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv": "^6.2.7",
+    "csv-parse": "^5.3.5"
+  }
+}
