@@ -2,11 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   csv: ^6.2.7
-  csv-parse: ^5.3.5
+  csv-parser: ^3.0.0
+  csv-writer: ^1.6.0
 
 dependencies:
   csv: 6.2.7
-  csv-parse: 5.3.5
+  csv-parser: 3.0.0
+  csv-writer: 1.6.0
 
 packages:
 
@@ -18,8 +20,20 @@ packages:
     resolution: {integrity: sha512-8O5KTIRtwmtD3+EVfW6BCgbwZqJbhTYsQZry12F1TP5RUp0sD9tp1UnCWic3n0mLOhzeocYaCZNYxOGSg3dmmQ==}
     dev: false
 
+  /csv-parser/3.0.0:
+    resolution: {integrity: sha512-s6OYSXAK3IdKqYO33y09jhypG/bSDHPuyCme/IdEHfWpLf/jKcpitVFyOC6UemgGk8v7Q5u2XE0vvwmanxhGlQ==}
+    engines: {node: '>= 10'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
+    dev: false
+
   /csv-stringify/6.2.4:
     resolution: {integrity: sha512-RVzGaBeHl0IspzOSiNr1e7XDM7ajuESlqetQbxH2pBPplIWycx0gAVclxNEa4lc91brK6LIE0PrdEoHtZYIHIQ==}
+    dev: false
+
+  /csv-writer/1.6.0:
+    resolution: {integrity: sha512-NOx7YDFWEsM/fTRAJjRpPp8t+MKRVvniAg9wQlUKx20MFrPs73WLJhFf5iteqrxNYnsy924K3Iroh3yNHeYd2g==}
     dev: false
 
   /csv/6.2.7:
@@ -30,6 +44,10 @@ packages:
       csv-parse: 5.3.5
       csv-stringify: 6.2.4
       stream-transform: 3.2.2
+    dev: false
+
+  /minimist/1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: false
 
   /stream-transform/3.2.2:

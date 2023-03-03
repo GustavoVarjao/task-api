@@ -5,13 +5,15 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch src/server.js",
+    "db-delete": "rm src/database/db.csv"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "csv": "^6.2.7",
-    "csv-parse": "^5.3.5"
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
   }
 }
