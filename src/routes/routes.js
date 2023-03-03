@@ -16,7 +16,7 @@ export const routes = [
         description,
         createdAt,
         updatedAt: null,
-        createdAt: null,
+        completedAt: null,
       };
 
       database.insert(task);
@@ -27,8 +27,10 @@ export const routes = [
   {
     method: 'GET',
     path: '/tasks',
-    handler(req, res) {
-      return res.writeHead(200).end();
+    async handler(req, res) {
+      const tasks = await database.select();
+
+      return res.writeHead(200).end(tasks);
     },
   },
 ];

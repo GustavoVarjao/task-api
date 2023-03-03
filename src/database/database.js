@@ -15,9 +15,10 @@ export class Database {
     });
   }
 
-  select(table) {
-    const data = this.#database;
-    console.log(data);
+  async select() {
+    this.#database = await readDatabase(databasePath);
+
+    return JSON.stringify(this.#database);
   }
 
   async insert(data) {
