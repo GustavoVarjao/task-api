@@ -15,10 +15,20 @@ export class Database {
     });
   }
 
-  async select() {
+  async select(search) {
     this.#database = await readDatabase(databasePath);
 
-    return JSON.stringify(this.#database);
+    let data = this.#database;
+
+    if (search) {
+      data = data.filter(row => {
+        return Object.entries(search).some(([key, value]) => {
+          return row[key].toLowerCase().includes(value.toLowerCase());
+        });
+      });
+    }
+
+    return JSON.stringify(data);
   }
 
   async insert(data) {

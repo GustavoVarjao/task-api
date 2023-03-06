@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Database } from '../database/database.js';
+import { buildRoutePath } from '../middlewares/build-route-path.js';
 
 const database = new Database();
 
@@ -26,11 +27,22 @@ export const routes = [
   },
   {
     method: 'GET',
-    path: '/tasks',
+    path: buildRoutePath('/tasks'),
     async handler(req, res) {
-      const tasks = await database.select();
+      const search = {
+        title: req.query,
+        description: req.query,
+        createdAt: req.query,
+      };
+
+      const tasks = await database.select(req.query ? search : null);
 
       return res.writeHead(200).end(tasks);
     },
+  },
+  {
+    method: 'DELETE',
+    path: '/tasks/:id',
+    handler(req, res) {},
   },
 ];

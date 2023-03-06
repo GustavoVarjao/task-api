@@ -3,12 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   csv: ^6.2.7
   csv-parser: ^3.0.0
-  csv-writer: ^1.6.0
+  path-to-regexp: ^6.2.1
+  querystring: ^0.2.1
 
 dependencies:
   csv: 6.2.7
   csv-parser: 3.0.0
-  csv-writer: 1.6.0
+  path-to-regexp: 6.2.1
+  querystring: 0.2.1
 
 packages:
 
@@ -32,10 +34,6 @@ packages:
     resolution: {integrity: sha512-RVzGaBeHl0IspzOSiNr1e7XDM7ajuESlqetQbxH2pBPplIWycx0gAVclxNEa4lc91brK6LIE0PrdEoHtZYIHIQ==}
     dev: false
 
-  /csv-writer/1.6.0:
-    resolution: {integrity: sha512-NOx7YDFWEsM/fTRAJjRpPp8t+MKRVvniAg9wQlUKx20MFrPs73WLJhFf5iteqrxNYnsy924K3Iroh3yNHeYd2g==}
-    dev: false
-
   /csv/6.2.7:
     resolution: {integrity: sha512-W9rB5/QWqXg2rQcAOT7lDHfxhDavg1BEmy+WaxKRYowzK9Dq+7WHIJo/8Xvry7rtaWQTMgl0wkS/cfd1k9cQUg==}
     engines: {node: '>= 0.1.90'}
@@ -48,6 +46,16 @@ packages:
 
   /minimist/1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: false
+
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
+    dev: false
+
+  /querystring/0.2.1:
+    resolution: {integrity: sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==}
+    engines: {node: '>=0.4.x'}
+    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: false
 
   /stream-transform/3.2.2:
