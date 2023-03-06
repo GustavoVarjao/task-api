@@ -7,7 +7,7 @@ const database = new Database();
 export const routes = [
   {
     method: 'POST',
-    path: '/tasks',
+    path: buildRoutePath('/tasks'),
     handler(req, res) {
       const { title, description, createdAt } = req.body;
 
@@ -42,7 +42,11 @@ export const routes = [
   },
   {
     method: 'DELETE',
-    path: '/tasks/:id',
-    handler(req, res) {},
+    path: buildRoutePath('/tasks/:id'),
+    handler(req, res) {
+      database.delete(req.id);
+
+      return res.writeHead(204).end();
+    },
   },
 ];

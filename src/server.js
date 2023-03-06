@@ -13,13 +13,15 @@ const server = http.createServer(async (req, res) => {
   });
 
   if (route) {
-    if (method === 'GET') {
-      req.query = extractQueryParams(url);
-    }
-
     const { path, handler } = route;
 
-    //const test = path.exec(url);
+    if (method === 'GET') {
+      req.query = extractQueryParams(url);
+    } else {
+      const urlParams = path.exec(url);
+
+      req.id = Array.isArray(urlParams) ? urlParams[1] : null;
+    }
 
     return handler(req, res);
   }
