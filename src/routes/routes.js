@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Database } from '../database/database.js';
-import { buildRoutePath } from '../middlewares/build-route-path.js';
+import { buildRoutePath } from '../utils/build-route-path.js';
 
 const database = new Database();
 
@@ -29,13 +29,15 @@ export const routes = [
     method: 'GET',
     path: buildRoutePath('/tasks'),
     async handler(req, res) {
-      const search = {
-        title: req.query,
-        description: req.query,
-        createdAt: req.query,
+      const { search } = req.query;
+
+      const searchObj = {
+        title: search,
+        description: search,
+        createdAt: search,
       };
 
-      const tasks = await database.select(req.query ? search : null);
+      const tasks = await database.select(search ? searchObj : null);
 
       return res.writeHead(200).end(tasks);
     },
@@ -43,8 +45,33 @@ export const routes = [
   {
     method: 'DELETE',
     path: buildRoutePath('/tasks/:id'),
-    handler(req, res) {
-      database.delete(req.id);
+    async handler(req, res) {
+      const { id } = req.params;
+
+      const isInvalidId = await database.validator(id);
+
+      if (isInvalidId) {
+        return res.writeHead(404).end();
+      }
+
+      database.delete(id);
+
+      return res.writeHead(204).end();
+    },
+  },
+  {
+    method: 'PUT',
+    path: buildRoutePath('/tasks/:id'),
+    async handler(req, res) {
+      const { id } = req.params;
+
+      const isInvalidId = await database.validator(id);
+
+      if (isInvalidId) {
+        return res.writeHead(404).end();
+      }
+
+      database.update(id, req.body);
 
       return res.writeHead(204).end();
     },

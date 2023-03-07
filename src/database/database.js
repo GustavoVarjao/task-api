@@ -31,6 +31,17 @@ export class Database {
     return JSON.stringify(data);
   }
 
+  async validator(id) {
+    this.#database = await readDatabase(databasePath);
+
+    const rowIndex = this.#database.findIndex(row => row.id === id);
+
+    if (rowIndex === -1) {
+      return true;
+    }
+    return false;
+  }
+
   async insert(data) {
     this.#database = await readDatabase(databasePath);
 
@@ -48,6 +59,22 @@ export class Database {
 
     if (rowIndex > -1) {
       this.#database.splice(rowIndex, 1);
+      this.#persist();
+    }
+  }
+
+  async update(id, data) {
+    this.#database = await readDatabase(databasePath);
+
+    const rowIndex = this.#database.findIndex(row => row.id === id);
+
+    if (rowIndex > -1) {
+      this.#database[rowIndex] = Object.assign(
+        {},
+        this.#database[rowIndex],
+        data
+      );
+
       this.#persist();
     }
   }

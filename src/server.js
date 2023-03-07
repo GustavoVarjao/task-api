@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { extractQueryParams } from './middlewares/build-route-path.js';
+import { extractQueryParams } from './utils/extract-query-params.js';
 import { json } from './middlewares/json.js';
 import { routes } from './routes/routes.js';
 
@@ -9,21 +9,18 @@ const server = http.createServer(async (req, res) => {
   await json(req, res);
 
   const route = routes.find(route => {
-    return route.method === method;
+    return route.method === method && route.path.test(url);
   });
 
   if (route) {
-    const { path, handler } = route;
+    const routeParams = req.url.match(route.path);
 
-    if (method === 'GET') {
-      req.query = extractQueryParams(url);
-    } else {
-      const urlParams = path.exec(url);
+    const { query, ...params } = routeParams.groups;
 
-      req.id = Array.isArray(urlParams) ? urlParams[1] : null;
-    }
+    req.params = params;
+    req.query = query ? extractQueryParams(query) : {};
 
-    return handler(req, res);
+    return route.handler(req, res);
   }
 
   return res.writeHead(404).end();
