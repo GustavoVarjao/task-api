@@ -78,4 +78,20 @@ export class Database {
       this.#persist();
     }
   }
+
+  async complete(id, data) {
+    this.#database = await readDatabase(databasePath);
+
+    const rowIndex = this.#database.findIndex(row => row.id === id);
+
+    if (rowIndex > -1) {
+      if (this.#database[rowIndex].completedAt) {
+        this.#database[rowIndex].completedAt = null;
+      } else {
+        this.#database[rowIndex].completedAt = data;
+      }
+
+      this.#persist();
+    }
+  }
 }
