@@ -36,10 +36,7 @@ export class Database {
 
     const rowIndex = this.#database.findIndex(row => row.id === id);
 
-    if (rowIndex === -1) {
-      return true;
-    }
-    return false;
+    return rowIndex === -1;
   }
 
   async insert(data) {
