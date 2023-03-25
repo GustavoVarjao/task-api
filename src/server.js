@@ -4,6 +4,17 @@ import { json } from './middlewares/json.js';
 import { routes } from './routes/routes.js';
 
 const server = http.createServer(async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, DELETE, PUT, PATCH'
+  );
+
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.end();
+  }
+
   const { method, url } = req;
 
   await json(req, res);

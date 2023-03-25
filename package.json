@@ -5,8 +5,7 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "dev": "node --watch src/server.js",
-    "db-delete": "rm src/database/db.csv"
+    "server": "node --watch src/server.js"
   },
   "keywords": [],
   "author": "",
