@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { stringify } from 'csv';
-import { readDatabase } from './databaseReader.js';
+import { readDatabase } from './databaseReader';
 
 const databasePath = new URL('./db.csv', import.meta.url);
 
@@ -34,7 +34,7 @@ export class Database {
   async validator(id) {
     this.#database = await readDatabase(databasePath);
 
-    const rowIndex = this.#database.findIndex(row => row.id === id);
+    const rowIndex = this.#database.findIndex((row) => row.id === id);
 
     return rowIndex === -1;
   }
@@ -52,7 +52,7 @@ export class Database {
   async delete(id) {
     this.#database = await readDatabase(databasePath);
 
-    const rowIndex = this.#database.findIndex(row => row.id === id);
+    const rowIndex = this.#database.findIndex((row) => row.id === id);
 
     if (rowIndex > -1) {
       this.#database.splice(rowIndex, 1);
@@ -63,13 +63,13 @@ export class Database {
   async update(id, data) {
     this.#database = await readDatabase(databasePath);
 
-    const rowIndex = this.#database.findIndex(row => row.id === id);
+    const rowIndex = this.#database.findIndex((row) => row.id === id);
 
     if (rowIndex > -1) {
       this.#database[rowIndex] = Object.assign(
         {},
         this.#database[rowIndex],
-        data
+        data,
       );
 
       this.#persist();
@@ -79,7 +79,7 @@ export class Database {
   async complete(id, data) {
     this.#database = await readDatabase(databasePath);
 
-    const rowIndex = this.#database.findIndex(row => row.id === id);
+    const rowIndex = this.#database.findIndex((row) => row.id === id);
 
     if (rowIndex > -1) {
       if (this.#database[rowIndex].completedAt) {

@@ -1,13 +1,13 @@
 import http from 'node:http';
-import { extractQueryParams } from './utils/extract-query-params.js';
-import { json } from './middlewares/json.js';
-import { routes } from './routes/routes.js'
+import { extractQueryParams } from './utils/extractQueryParams';
+import { json } from './middlewares/json';
+import { routes } from './routes/routes';
 
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
-    'GET, POST, DELETE, PUT, PATCH'
+    'GET, POST, DELETE, PUT, PATCH',
   );
 
   if (req.method === 'OPTIONS') {
@@ -19,7 +19,7 @@ const server = http.createServer(async (req, res) => {
 
   await json(req, res);
 
-  const route = routes.find(route => {
+  const route = routes.find((route) => {
     return route.method === method && route.path.test(url);
   });
 
