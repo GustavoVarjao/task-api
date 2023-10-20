@@ -4,6 +4,7 @@ import { taskGet } from './taskGet';
 import { taskPost } from './taskPost';
 import { taskDelete } from './taskDelete';
 import { taskPut } from './taskPut';
+import { taskPatch } from './taskPatch';
 
 export const database = new Database();
 
@@ -12,4 +13,5 @@ export const buildRoutes = (app: FastifyInstance) => {
   app.post('/tasks', taskPost);
   app.delete('/tasks/:id', taskDelete);
   app.put('/tasks/:id', taskPut);
+  app.patch('/tasks/:id/complete', taskPatch);
 };
