@@ -1,7 +1,7 @@
 import http from 'node:http';
 import { extractQueryParams } from './utils/extract-query-params.js';
 import { json } from './middlewares/json.js';
-import { routes } from './routes/routes.js';
+import { routes } from './routes/routes.js'
 
 const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

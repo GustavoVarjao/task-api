@@ -10,8 +10,8 @@ export class Database {
   #persist() {
     const csvData = stringify(this.#database, { header: true });
 
-    writeFile(databasePath, csvData, error => {
-      console.log(error);
+    writeFile(databasePath, csvData, (error) => {
+      console.error(error);
     });
   }
 
@@ -21,7 +21,7 @@ export class Database {
     let data = this.#database;
 
     if (search) {
-      data = data.filter(row => {
+      data = data.filter((row) => {
         return Object.entries(search).some(([key, value]) => {
           return row[key].toLowerCase().includes(value.toLowerCase());
         });

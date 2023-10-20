@@ -1,9 +1,9 @@
-import csvParser from 'csv-parser';
 import { Readable } from 'node:stream';
 import { readFile } from 'node:fs/promises';
+import csvParser from 'csv-parser';
 
 export async function readDatabase(databasePath) {
-  const csvToObj = buffer => {
+  const csvToObj = (buffer) => {
     const stream = Readable.from(buffer.toString());
     const results = [];
 

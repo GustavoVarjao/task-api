@@ -6,6 +6,7 @@ export async function json(req, res) {
   }
 
   try {
+    // eslint-disable-next-line node/prefer-global/buffer
     req.body = JSON.parse(Buffer.concat(buffer).toString());
   } catch {
     req.body = null;
