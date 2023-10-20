@@ -28,7 +28,7 @@ export class Database {
       });
     }
 
-    return JSON.stringify(data);
+    return data;
   }
 
   async validator(id) {

@@ -39,6 +39,8 @@ export const routes = [
 
       const tasks = await database.select(search ? searchObj : null);
 
+      console.log('aaaaaaaa', tasks, 'aaaaaaaaa');
+
       return res.writeHead(200).end(tasks);
     },
   },
