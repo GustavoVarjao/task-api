@@ -1,20 +1,12 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { RequestBody, RequestParams } from '../model/RequestData';
 import { database } from '.';
-
-interface RequestPatchParams {
-  id: string;
-}
-
-interface RequestPatchBody {
-  completedAt: string;
-}
-
 export const taskPatch = async (
   request: FastifyRequest,
   reply: FastifyReply,
 ) => {
-  const { id } = request.params as RequestPatchParams;
-  const { completedAt } = request.body as RequestPatchBody;
+  const { id } = request.params as RequestParams;
+  const { completedAt } = request.body as RequestBody;
 
   const isInvalidId = await database.validator(id);
 

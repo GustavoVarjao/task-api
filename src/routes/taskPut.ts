@@ -1,18 +1,9 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { RequestBody, RequestParams } from '../model/RequestData';
 import { database } from '.';
 
-interface RequestPutParams {
-  id: string;
-}
-
-interface RequestPutBody {
-  title: string;
-  description: string;
-  updatedAt: string;
-}
-
 export const taskPut = async (request: FastifyRequest, reply: FastifyReply) => {
-  const { id } = request.params as RequestPutParams;
+  const { id } = request.params as RequestParams;
 
   const isInvalidId = await database.validator(id);
 
@@ -20,7 +11,7 @@ export const taskPut = async (request: FastifyRequest, reply: FastifyReply) => {
     return reply.status(404).send();
   }
 
-  database.update(id, request.body as RequestPutBody);
+  database.update(id, request.body as RequestBody);
 
   return reply.status(204).send();
 };

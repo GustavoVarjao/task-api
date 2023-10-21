@@ -1,9 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { RequestGetQuery } from '../model/RequestData';
 import { database } from '.';
-
-interface RequestGetQuery {
-  search: string;
-}
 
 export const taskGet = async (request: FastifyRequest, reply: FastifyReply) => {
   const { search } = request.query as RequestGetQuery;
