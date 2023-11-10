@@ -1,17 +1,27 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { RequestGetQuery } from '../model/RequestData';
-import { database } from '.';
+import { TaskModel } from '../model/Task';
 
-export const taskGet = async (request: FastifyRequest, reply: FastifyReply) => {
-  const { search } = request.query as RequestGetQuery;
+export const taskGet = async (
+  request: FastifyRequest<{
+    Querystring: RequestGetQuery;
+  }>,
+  reply: FastifyReply,
+) => {
+  const { search } = request.query;
 
-  const searchObj = {
-    title: search,
-    description: search,
-    createdAt: search,
-  };
+  if (search) {
+    const tasks = await TaskModel.find({
+      $or: [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+      ],
+    }).exec();
 
-  const tasks = await database.select(search ? searchObj : null);
+    return reply.status(200).send(tasks);
+  }
+
+  const tasks = await TaskModel.find();
 
   return reply.status(200).send(tasks);
 };

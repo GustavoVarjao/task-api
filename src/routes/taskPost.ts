@@ -1,25 +1,22 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { v4 as uuidV4 } from 'uuid';
-import { Database } from '../database/database';
 import type { RequestBody } from '../model/RequestData';
-const database = new Database();
+import { TaskModel } from '../model/Task';
 
 export const taskPost = async (
-  request: FastifyRequest,
+  request: FastifyRequest<{
+    Body: RequestBody;
+  }>,
   reply: FastifyReply,
 ) => {
-  const { title, description, createdAt } = request.body as RequestBody;
+  const { title, description, createdAt } = request.body;
 
-  const task = {
+  await TaskModel.create({
     id: uuidV4(),
     title,
     description,
     createdAt,
-    updatedAt: null,
-    completedAt: null,
-  };
-
-  database.insert(task);
+  });
 
   return reply.status(201).send();
 };

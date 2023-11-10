@@ -1,20 +1,35 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { RequestBody, RequestParams } from '../model/RequestData';
-import { database } from '.';
+import { TaskModel } from '../model/Task';
+
 export const taskPatch = async (
-  request: FastifyRequest,
+  request: FastifyRequest<{
+    Params: RequestParams;
+    Body: RequestBody;
+  }>,
   reply: FastifyReply,
 ) => {
-  const { id } = request.params as RequestParams;
-  const { completedAt } = request.body as RequestBody;
+  const { id } = request.params;
+  const { completedAt } = request.body;
 
-  const isInvalidId = await database.validator(id);
+  const task = await TaskModel.find({
+    id,
+  });
 
-  if (isInvalidId) {
-    return reply.status(404).send();
+  if (task[0].completedAt) {
+    await TaskModel.updateOne({ id }, { $unset: { completedAt: 1 } });
+
+    return reply.status(204).send();
   }
 
-  database.complete(id, completedAt);
+  await TaskModel.updateOne(
+    {
+      id,
+    },
+    {
+      completedAt,
+    },
+  );
 
   return reply.status(204).send();
 };
